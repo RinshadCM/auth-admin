@@ -49,7 +49,7 @@ const Header = (props) => {
     </a>
     </Link>
         <Link href="/" className="font-weight-bold">
-          <a className="pl-3 pt-3 h3" style={{color:"white"}}><Typical steps={['TECH', 1000,'BLOG', 500,'SITE', 500,'TECHBLOGSITE', 500]} loop={Infinity} wrapper="p"/></a>
+          <a className="pl-3 pt-3 h3" style={{color:"white"}}><Typical steps={['TECH', 1000,'ADMIN', 500,'PANEL', 500,'TECHADMINPANEL', 500]} loop={Infinity} wrapper="p"/></a>
         </Link>
         <NavbarToggler onClick={toggle} />
 
@@ -58,7 +58,7 @@ const Header = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
 
-          <>
+          {/* <>
              <NavItem>
              <button className="btn btn-warning">
               <NavLink href="/blogs">
@@ -69,7 +69,7 @@ const Header = (props) => {
                 </button>
                 {`  `}
             </NavItem>
-             </>
+             </> */}
 
               
            {!isAuthenticated() && loaded && (

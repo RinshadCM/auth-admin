@@ -264,13 +264,6 @@ function CompanyHeader({ id, companyDetails }) {
             >
               Edit
             </button> */}
-            <button
-              className="delete-button"
-              // onClick={() => fileRef.current.click()}
-              onClick={() => handleDelete()}
-            >
-              Delete
-            </button>
           </div>
           <button
             onClick={() => notify()}

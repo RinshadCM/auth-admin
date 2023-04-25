@@ -1,4 +1,6 @@
 import { useRouter } from "next/router";
+import Layout from "../../../components/Layout";
+import PrivateRoute from "../../../components/authentication/PrivateRoute";
 import { useState, useEffect } from "react";
 import CompanyHeader from "../../../components/CompanyHeader";
 // import Jobs from "../../../components/CompanySections/Jobs";
@@ -30,12 +32,14 @@ function Company() {
 
   return (
     <div>
-      <Sidebar />
-      <div className="main">
-        <div className="min-h-screen pb-[20px] bg-[#f8f8f8]">
-          <CompanyHeader id={id} companyDetails={companyDetails} />
+      <Layout>
+        <PrivateRoute>
+          {/* <Sidebar /> */}
+          <div className="main">
+            <div className="min-h-screen pb-[20px] bg-[#f8f8f8]">
+              <CompanyHeader id={id} companyDetails={companyDetails} />
 
-          {/* <ul className="flex justify-between w-full px-20 text-lg pt-5 border-b">
+              {/* <ul className="flex justify-between w-full px-20 text-lg pt-5 border-b">
             <li
               onClick={() => setCurrentSection("Profile")}
               className={`current-section-option ${
@@ -62,15 +66,17 @@ function Company() {
             </li>
           </ul> */}
 
-          {/* {currentSection === "Profile" ? (
+              {/* {currentSection === "Profile" ? (
             <Profile id={id} companyDetails={companyDetails} />
           ) : currentSection === "Jobs" ? (
             <Jobs id={id} companyDetails={companyDetails} />
           ) : (
             <KeyPeople id={id} companyDetails={companyDetails} />
           )} */}
-        </div>
-      </div>
+            </div>
+          </div>
+        </PrivateRoute>
+      </Layout>
     </div>
   );
 }

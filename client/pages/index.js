@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import fetch from "isomorphic-fetch";
 import LandingLayout from "../components/LandingPage/Layout";
 import Layout from "../components/Layout";
 import Link from "next/link";
@@ -6,8 +7,44 @@ import Swal from "sweetalert2";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import BookIcon from "@material-ui/icons/Book";
+import cookie from "js-cookie";
+
+
+
+export const removeLocalStorage = (key) =>{
+  if(process.browser){
+      localStorage.removeItem(key)
+  }
+};
+
+export const removeCookie = (key)=>{
+  if(process.browser){
+      cookie.remove(key,{
+          expires:365
+      });
+  }
+};
+
+export const logout =(next) =>{
+  removeCookie('token')
+  removeLocalStorage('user')
+  // next();
+
+  return fetch(`http://localhost:4000/api/logout`,{
+      method: "GET"
+  }).then(response =>{
+      console.log("Successfully Logged Out")
+  }).catch(err=> console.log(err))
+}
+
 
 const Index = () => {
+  
+  useEffect(() => {
+    logout();
+  }, []);
+  
+
   return (
     <>
       <LandingLayout
@@ -20,11 +57,11 @@ const Index = () => {
               <div className="color-bg-hero"></div>
               <div className="texto-hero">
                 <div>
-                  <span className="selectionNone">Tech Blogsite</span>
+                  <span className="selectionNone">Admin Panel</span>
                 </div>
                 <div className="hero-title">
                   <h1>
-                    "Tech Blogsite" <br />
+                    "Admin Panel" <br />
                     Browse as well as create blogs related to various different
                     kind technologies.
                   </h1>

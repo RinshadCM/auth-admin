@@ -56,16 +56,16 @@ function Companies() {
     // Router.push("/userDashboard/companies");
   };
 
-const handleDelete = async (key) => {
-  notify()
-  console.log(key);
-  await axios({
-    method: "delete",
-    url: `http://localhost:4000/delete-company/${key}`,
-  });
-  // Router.push("/userDashboard/companies");
-  window.location.reload();
-};
+  const handleDelete = async (key) => {
+    notify()
+    console.log(key);
+    await axios({
+      method: "delete",
+      url: `http://localhost:4000/delete-company/${key}`,
+    });
+    // Router.push("/userDashboard/companies");
+    window.location.reload();
+  };
 
 
   // console.log(companyDetails);
@@ -168,37 +168,6 @@ const handleDelete = async (key) => {
 
                 </td>
               </tr>
-              {/* <tr>
-          <td>
-            <div className='d-flex align-items-center'>
-              <img
-                src='https://mdbootstrap.com/img/new/avatars/6.jpg'
-                alt=''
-                style={{ width: '45px', height: '45px' }}
-                className='rounded-circle'
-              />
-              <div className='ms-3'>
-                <p className='fw-bold mb-1'>Alex Ray</p>
-                <p className='text-muted mb-0'>alex.ray@gmail.com</p>
-              </div>
-            </div>
-          </td>
-          <td>
-            <p className='fw-normal mb-1'>Consultant</p>
-            <p className='text-muted mb-0'>Finance</p>
-          </td>
-          <td>
-            <MDBBadge color='primary' pill>
-              Onboarding
-            </MDBBadge>
-          </td>
-          <td>Junior</td>
-          <td>
-            <MDBBtn color='link' rounded size='sm'>
-              Edit
-            </MDBBtn>
-          </td>
-        </tr> */}
             </MDBTableBody>
           ))}
 

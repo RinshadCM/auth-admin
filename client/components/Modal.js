@@ -128,11 +128,12 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
       setModalOpen(false);
     }
   };
+  
   return (
     <div
       id="container"
       onClick={handleClose}
-      className={`${!modalOpen ? "hidden" : "fixed"
+      className={`${!modalOpen ? "hidepage" : "fixedshow"
         } top-0 left-0 z-50 overflow-auto bg-smoke-light flex w-[100vw] h-[100vh]`}
     >
       <div className="relative bg-white m-auto flex rounded-lg flex-col">
@@ -246,7 +247,7 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
 
             </div>
           </div>
-          <input type="file" ref={fileRef} hidden onChange={handleFileChange} />
+          {/* <input type="file" ref={fileRef} hidden onChange={handleFileChange} /> */}
           <div className="float-right ml-[0.75rem] mt-[1.5rem]">
             <button
               onClick={() => {

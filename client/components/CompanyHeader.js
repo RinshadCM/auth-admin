@@ -18,6 +18,7 @@ function CompanyHeader({ id, companyDetails }) {
     );
   };
 
+
   const notify = () => {
     toast(message, {
       position: "bottom-center",
@@ -28,6 +29,7 @@ function CompanyHeader({ id, companyDetails }) {
         backgroundColor: "black",
       },
     });
+    Router.push("/userDashboard/companies");
   };
   const fileRef = useRef(null);
 

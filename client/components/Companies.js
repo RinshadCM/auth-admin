@@ -1,11 +1,23 @@
 import Link from "next/link";
+import { AiFillCheckCircle, AiOutlinePlus } from "react-icons/ai";
 import { useState, useEffect } from "react";
 import Modal from "./Modal";
 import axios from "axios";
+import React from 'react';
+import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import { Button } from "reactstrap";
+import Router from "next/router";
+import toast, { Toaster } from "react-hot-toast";
+
 
 function Companies() {
   const [userList, setuserList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+
+  // useEffect(() => {
+  //   console.log(userList);
+  // }, [userList]);
+
 
   useEffect(() => {
     axios({
@@ -17,6 +29,44 @@ function Companies() {
       setuserList(data.data);
     });
   }, []);
+
+  const message = () => {
+    return (
+      <div className="flex items-center justify-betwen">
+        <div className="text-white">
+          <AiFillCheckCircle />
+        </div>
+        <div className=" ml-2 font-inter text-white text-[14px] ">
+          Details deleted successfully!
+        </div>
+      </div>
+    );
+  };
+
+  const notify = () => {
+    toast(message, {
+      position: "bottom-center",
+      style: {
+        width: "fit-content",
+        borderRadius: "9999px",
+        fontFamily: "Inter",
+        backgroundColor: "black",
+      },
+    });
+    // Router.push("/userDashboard/companies");
+  };
+
+const handleDelete = async (key) => {
+  notify()
+  console.log(key);
+  await axios({
+    method: "delete",
+    url: `http://localhost:4000/delete-company/${key}`,
+  });
+  // Router.push("/userDashboard/companies");
+  window.location.reload();
+};
+
 
   // console.log(companyDetails);
 
@@ -56,7 +106,7 @@ function Companies() {
         </div>
 
         {/* companies */}
-        <div className="columns-1 mx-5 p-5">
+        {/* <div className="columns-1 mx-5 p-5">
           {userList.map((element) => (
             <Link
               key={element._id}
@@ -66,7 +116,99 @@ function Companies() {
               <p className="cursor-pointer">{element.email}</p>
             </Link>
           ))}
-        </div>
+        </div> */}
+
+        <MDBTable align='middle'>
+          <MDBTableHead className="text-white">
+            <tr>
+              <th scope='col'>Name</th>
+              <th scope='col'>Email</th>
+              <th scope='col'>Role</th>
+              {/* <th scope='col'>Status</th> */}
+              <th scope='col'>Actions</th>
+            </tr>
+          </MDBTableHead>
+          {userList.map((element) => (
+            <MDBTableBody className="text-white">
+              <tr>
+                <td>
+                  <div className='d-flex align-items-center'>
+                    <div className='ms-3'>
+                      <p className='fw-bold mb-1'>{element.fname} {element.lname}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <p className='fw-normal mb-1'>{element.email}</p>
+                </td>
+                <td>
+                  <p className='fw-normal mb-1'>{element.roles[0]}</p>
+                </td>
+                {/* <td>
+            <MDBBadge color='success' pill>
+              Active
+            </MDBBadge>
+          </td> */}
+                <td>
+                  <Button color='link' rounded size='sm'
+                    key={element._id}
+                    href={`/userDashboard/companies/${element._id}`}
+                    passHref>
+                    Edit
+                  </Button>
+                  <Button
+                    color='link'
+                    rounded
+                    size='sm'
+                    key={element._id}
+                    onClick={() => handleDelete(element._id)}
+                  >
+                    Delete
+                  </Button>
+
+                </td>
+              </tr>
+              {/* <tr>
+          <td>
+            <div className='d-flex align-items-center'>
+              <img
+                src='https://mdbootstrap.com/img/new/avatars/6.jpg'
+                alt=''
+                style={{ width: '45px', height: '45px' }}
+                className='rounded-circle'
+              />
+              <div className='ms-3'>
+                <p className='fw-bold mb-1'>Alex Ray</p>
+                <p className='text-muted mb-0'>alex.ray@gmail.com</p>
+              </div>
+            </div>
+          </td>
+          <td>
+            <p className='fw-normal mb-1'>Consultant</p>
+            <p className='text-muted mb-0'>Finance</p>
+          </td>
+          <td>
+            <MDBBadge color='primary' pill>
+              Onboarding
+            </MDBBadge>
+          </td>
+          <td>Junior</td>
+          <td>
+            <MDBBtn color='link' rounded size='sm'>
+              Edit
+            </MDBBtn>
+          </td>
+        </tr> */}
+            </MDBTableBody>
+          ))}
+
+        </MDBTable>
+
+
+
+
+        <Toaster position="bottom-center" />
+
       </div>
     </div>
   );

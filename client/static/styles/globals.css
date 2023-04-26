@@ -2,37 +2,103 @@
 /* globals.css */
 
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
-
-@layer components {
-  .sidebar-option {
-    @apply relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6 cursor-pointer;
-  }
-  .main {
-    @apply bg-gray-100 calc-width max-h-screen float-right font-inter;
-  }
-
-  .calc-width {
-    @apply w-[calc(100%-16rem)];
-  }
-
-  .save-button {
-    @apply outline-none w-28 py-[0.625rem] px-[0.75rem] rounded-[0.3125rem]  font-semibold text-[0.875rem] h-[2.5rem] cursor-pointer text-white bg-[#02ef29] mb-[20px]  border-none mt-[10px] flex items-center justify-center;
-  }
-  .delete-button {
-    @apply outline-none w-28 py-[0.625rem] px-[0.75rem] rounded-[0.3125rem]  font-semibold text-[0.875rem] h-[2.5rem] cursor-pointer text-white bg-[#e50913] mb-[20px]  border-none mt-[10px] flex items-center justify-center;
-  }
-
-  .current-section-option {
-    @apply cursor-pointer px-10;
-  }
+.sidebar-option {
+position: relative;
+display: flex;
+flex-direction: row;
+align-items: center;
+height: 2.75rem;
+width:13rem;
+outline: none;
+cursor: pointer;
+padding-right: 1.5rem;
+color: white;
+background-color: transparent;
+border-left: 0.25rem solid transparent;
 }
+.sidebar-option:hover {
+background-color: transparent;
+color: #374151;
+border-left-color: #7c3aed;
+}
+
+.main {
+background-color: transparent;
+width: calc(100% - 16rem);
+margin-top: -10rem;
+max-height: 100vh;
+float: right;
+font-family: 'Inter', sans-serif;
+}
+
+.save-button {
+outline: none;
+width: 4.375rem;
+padding-top: 0.625rem;
+padding-right: 0.75rem;
+padding-bottom: 0.625rem;
+padding-left: 0.75rem;
+border-radius: 0.3125rem;
+font-weight: 600;
+font-size: 0.875rem;
+height: 2.5rem;
+cursor: pointer;
+color: #ffffff;
+background-color: #02ef29;
+margin-bottom: 1.25rem;
+border: none;
+margin-top: 0.625rem;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.delete-button {
+outline: none;
+width: 4.375rem;
+padding-top: 0.625rem;
+padding-right: 0.75rem;
+padding-bottom: 0.625rem;
+padding-left: 0.75rem;
+border-radius: 0.3125rem;
+font-weight: 600;
+font-size: 0.875rem;
+height: 2.5rem;
+cursor: pointer;
+color: #ffffff;
+background-color: #e50913;
+margin-bottom: 1.25rem;
+border: none;
+margin-top: 0.625rem;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.current-section-option {
+cursor: pointer;
+padding-left: 1.25rem;
+padding-right: 1.25rem;
+}
+
 .preferred_roles {
-  @apply text-[#788699] border-[1px] border-[#d6dae0] rounded-3xl my-[0.35rem] mx-[0.25rem] py-[0.7rem] px-[0.875rem] leading-[1.25rem] text-[0.875rem] text-center font-normal inline-flex cursor-pointer;
+color: #788699;
+border: 0.0625rem solid #d6dae0;
+border-radius: 1.875rem;
+margin-top: 0.125rem;
+margin-right: 0.3125rem;
+margin-bottom: 0.125rem;
+margin-left: 0.3125rem;
+padding-top: 0.4375rem;
+padding-right: 1.125rem;
+padding-bottom: 0.4375rem;
+padding-left: 1.125rem;
+line-height: 1.5625rem;
+font-size: 0.875rem;
+text-align: center;
+font-weight: normal;
+display: inline-flex;
+cursor: pointer;
 }
 
 .MuiSvgIcon-root {

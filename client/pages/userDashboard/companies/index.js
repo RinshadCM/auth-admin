@@ -8,7 +8,7 @@ function companies() {
     <div>
       <Layout>
         <PrivateRoute>
-          {/* <Sidebar /> */}
+          <Sidebar />
           <Companies />
         </PrivateRoute>
       </Layout>

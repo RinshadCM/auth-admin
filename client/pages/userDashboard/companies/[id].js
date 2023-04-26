@@ -34,7 +34,7 @@ function Company() {
     <div>
       <Layout>
         <PrivateRoute>
-          {/* <Sidebar /> */}
+          <Sidebar />
           <div className="main">
             <div className="min-h-screen pb-[20px] bg-[#f8f8f8]">
               <CompanyHeader id={id} companyDetails={companyDetails} />

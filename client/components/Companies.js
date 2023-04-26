@@ -45,7 +45,7 @@ function Companies() {
 
   const notify = () => {
     toast(message, {
-      position: "bottom-center",
+      position: "top-center",
       style: {
         width: "fit-content",
         borderRadius: "9999px",
@@ -82,9 +82,9 @@ function Companies() {
           setModalOpen={setModalOpen}
         />
         {/* bottom */}
-        <div className="text-[#033443] max-w-[968px] mx-auto pt-5 my-0">
+        <div className="text-[#033443] max-w-[968px] mx-auto pt-5 bg-red-500 my-0">
           <div>
-            <div className="flex justify-end">
+            <div className="flex  justify-end">
               {/* <input
                 type="text"
                 placeholder="Search Company Name"
@@ -96,7 +96,7 @@ function Companies() {
                 className="px-3 py-2 placeholder-[#6B7280] text-[#030303]  placeholder-opacity-90 relative bg-white rounded-md text-sm border-[1.5px]  focus:outline-none focus:border-[#2dc5a1] focus:border-2 w-56 transition duration-200 ease-in mr-8"
               /> */}
               <button
-                className="bg-collabi-green px-2 text-black h-9 w-32 rounded-md text-sm font-medium"
+                className="bg-collabi-green px-2 text-black  h-9 w-32 rounded-md text-sm font-medium"
                 onClick={() => setModalOpen(true)}
               >
                 Add User
@@ -118,7 +118,7 @@ function Companies() {
           ))}
         </div> */}
 
-        <MDBTable align='middle'>
+        <MDBTable align='middle mt-4'>
           <MDBTableHead className="text-white">
             <tr>
               <th scope='col'>Name</th>

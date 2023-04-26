@@ -10,7 +10,7 @@ const UserIndex =() =>{
     return(
         <Layout>
         <PrivateRoute>
-        <h2>User Dashboard</h2>
+        {/* <h2>User Dashboard</h2> */}
         <div className="text-dark">
             <Head>
                 <title>Dashboard</title>

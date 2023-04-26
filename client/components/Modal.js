@@ -136,17 +136,17 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
       className={`${!modalOpen ? "hidepage" : "fixedshow"
         } top-0 left-0 z-50 overflow-auto bg-smoke-light flex w-[100vw] h-[100vh]`}
     >
-      <div className="relative bg-white m-auto flex rounded-lg flex-col">
+      <div className="relative w-200 bg-white m-auto flex rounded-lg flex-col">
         <div className="bg-[#eff2f6] flex justify-between p-6 rounded-t-lg">
-          <p className="text-[0.875rem] text-black leading-5 font-semibold m-0">
+          {/* <p className=" text-black leading-5 font-semibold m-0">
             Add User
-          </p>
+          </p> */}
           <GrClose
             className="w-5 h-5 pt-0 z-50 text-[#808080] cursor-pointer"
             onClick={() => setModalOpen(false)}
           />
         </div>
-        <form className="p-6" onSubmit={handleSubmit}>
+        <form className="p-5" onSubmit={handleSubmit}>
           <div className="flex w-full items-center">
             {/* <div className="mr-8">
               <p className="text-[12px] font-semibold p-1 mt-1">Company Logo</p>
@@ -170,9 +170,9 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
             </div> */}
             <div className="flex flex-col space-y-6">
               <div className="w-full">
-                <p className="text-[12px] font-semibold p-1 mt-1">
+                {/* <p className="text-[12px] text-[#030303] font-semibold p-1 mt-1">
                   Email
-                </p>
+                </p> */}
                 <input
                   type="text"
                   placeholder="Email Address"
@@ -187,7 +187,7 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
                   value={pass}
                   onChange={(e) => setPass(e.target.value)}
                   placeholder="*******"
-                  className="px-1 py-2 placeholder-[#6B7280] text-[#030303]  placeholder-opacity-90 relative bg-white text-sm border rounded-tr-[3.5px] rounded-br-[3.5px]  focus:outline-none focus:border-[#2dc5a1] focus:border-2  w-full  transition duration-200 ease-in"
+                  className="px-1 py-2 placeholder-[#6B7280] text-[#030303]  placeholder-opacity-90 relative bg-white rounded text-sm border rounded-tr-[3.5px] rounded-br-[3.5px]  focus:outline-none focus:border-[#2dc5a1] focus:border-2  w-full  transition duration-200 ease-in"
                 />
               </div>
               <div className="flex w-full h-1/4">

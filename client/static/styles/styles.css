@@ -9,6 +9,7 @@
 }
 
 
+
 #nprogress .bar {
   height: 6px !important;
   /* background-color: #00dbde;
@@ -27,7 +28,7 @@ html {
   padding: 0;
   color: #fff;
   filter: blur(0.3px);
-  background: url(../assets/27263.jpg) no-repeat center center fixed;
+  background: url(../assets/bg2.jpeg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

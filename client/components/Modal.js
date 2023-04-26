@@ -104,7 +104,7 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
     setFname("");
     setLname("");
     setActivecheck(false);
-    setRoles("");
+    setRoles("Admin");
     setCompanyLogo(null);
     setModalOpen(false);
   };
@@ -128,7 +128,7 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
       setModalOpen(false);
     }
   };
-  
+
   return (
     <div
       id="container"
@@ -256,7 +256,7 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
                   setModalOpen(false);
                 }, 2000);
               }}
-              className="ml-[0.9375rem]  outline-none  min-w-[9.0625rem] py-[0.625rem] px-[0.75rem] rounded-[0.3125rem]  font-semibold text-[0.875rem] h-[2.5rem] cursor-pointer text-white bg-[#1a73e8] mb-[20px]  border-none mt-[10px] flex items-center justify-center"
+              className="ml-[0.9375rem] outline-none  min-w-[9.0625rem] py-[0.625rem] px-[0.75rem] rounded-[0.3125rem]  font-semibold text-[0.875rem] h-[2.5rem] cursor-pointer text-black bg-[#ea2910] mb-[20px]  border-none mt-[10px] flex items-center justify-center"
             >
               Save
             </button>

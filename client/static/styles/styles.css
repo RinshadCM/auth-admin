@@ -1,4 +1,6 @@
-@import url(https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap);
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap');
+
+
 
 
 .fixedshow {
@@ -20,8 +22,8 @@ background: linear-gradient(to right, #00CDAC, #02AAB0); /* W3C, IE 10+/ Edge, F
 
 }
 * {
-  font-family: "Share Tech Mono", monospace;
-}
+  font-family: 'Poppins', sans-serif;
+    }
 body,
 html {
   margin: 0;

@@ -34,7 +34,7 @@ function Companies() {
     return (
       <div className="flex items-center justify-betwen">
         <div className="text-white">
-          <AiFillCheckCircle />
+          {/* <AiFillCheckCircle /> */}
         </div>
         <div className=" ml-2 font-inter text-white text-[14px] ">
           Details deleted successfully!

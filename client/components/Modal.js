@@ -11,7 +11,7 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
     return (
       <div className="flex items-center justify-betwen">
         <div className="text-white">
-          <AiFillCheckCircle />
+          {/* <AiFillCheckCircle /> */}
         </div>
         <div className=" ml-2 font-inter text-white text-[14px] ">
           Details saved successfully!
@@ -22,7 +22,7 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
 
   const notify = () =>
     toast(message, {
-      position: "bottom-center",
+      position: "top-center",
       style: {
         width: "fit-content",
         borderRadius: "9999px",

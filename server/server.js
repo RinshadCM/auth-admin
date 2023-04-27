@@ -1,77 +1,75 @@
-const morgan = require("morgan");
-const express = require("express");
-const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const CompanyModel = require("./models/companies");
-require("dotenv").config();
-const blogRoutes = require("./routes/blog");
-const authRoutes = require("./routes/auth");
-const userRoutes = require("./routes/user");
-const categoryRoutes = require("./routes/category");
-const tagRoutes = require("./routes/tag");
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+require('dotenv').config();
+const AWS = require('aws-sdk');
+require('aws-sdk/lib/maintenance_mode_message').suppress = true;
+// const blogRoutes = require('./routes/blog');
+const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
+// const categoryRoutes = require('./routes/category');
+// const tagRoutes = require('./routes/tag');
 
 const app = express();
 
-const PORT = process.env.PORT || 4000;
-const url = process.env.MONGODB_URI || "mongodb://localhost:27017/auth";
-console.log(url);
+// Set the region
+AWS.config.update({ region: 'ap-south-1' });
 
-mongoose
-  .connect(url, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("MongoDatabase Successfully connected"))
-  .catch((err) => {
-    console.log(err);
-  });
+// Set the credentials
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_ID,
+  secretAccessKey:process.env.ACCESS_KEY_SECRET,
+});
+
+// Create a DynamoDB instance
+const dynamodb = new AWS.DynamoDB.DocumentClient();
+
+const PORT = process.env.PORT || 4000;
+console.log(dynamodb);
 
 // middlewares
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(morgan("dev"));
 
-  app.use(cors({ origin: `http://localhost:3000`, credentials: true }));
-
-
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
 // routes middlewares
-app.use("/api", blogRoutes);
-app.use("/api", authRoutes);
-app.use("/api", userRoutes);
-app.use("/api", categoryRoutes);
-app.use("/api", tagRoutes);
-// cors
-app.use(cors());
+// app.use('/api', blogRoutes);
+app.use('/api', authRoutes);
+app.use('/api', userRoutes);
+// app.use('/api', categoryRoutes);
+// app.use('/api', tagRoutes);
 
-
-
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   res.json({
-    "get list of all companies": "/get-companies",
-    "get details of a company by id": "/get-company/?_id=<company_id>",
-    "post a new company": "/create-company",
-    "update company details": "/update-company/?_id=<company_id> //PUT method",
-    "delete company": "/delete-company/?_id=<company_id> //DELETE method",
-    "get list of all jobs using companyId": "/get-jobs",
-    "post a new job": "/create-job",
-    "update job details": "/update-job //PUT method",
-    "delete job": "/delete-job //DELETE method",
+    'get list of all companies': '/get-companies',
+    'get details of a company by id': '/get-company/?_id=<company_id>',
+    'post a new company': '/create-company',
+    'update company details': '/update-company/?_id=<company_id> //PUT method',
+    'delete company': '/delete-company/:id //DELETE method', // changed to path param
+    'get list of all jobs using companyId': '/get-jobs',
+    'post a new job': '/create-job',
+    'update job details': '/update-job //PUT method',
+    'delete job': '/delete-job //DELETE method',
   });
 });
 
-// get a single idea by using _id
-app.get("/get-company", (req, res) => {
+// get a single company by using _id
+app.get('/get-company', (req, res) => {
   try {
     if (req.query._id !== undefined) {
-      CompanyModel.findOne({ _id: req.query._id }, (err, data) => {
+      const params = {
+        TableName: 'companies',
+        Key: {
+          _id: req.query._id,
+        },
+      };
+
+      dynamodb.get(params, (err, data) => {
         if (!err) {
           // console.log(data);
-          res.send(data);
+          res.send(data.Item);
         } else {
           console.log(err);
         }
@@ -82,56 +80,80 @@ app.get("/get-company", (req, res) => {
   }
 });
 
-// get the list of all ideas
+// get the list of all companies
 // req.body.name / req.query.name
-app.get("/get-companies", (req, res) => {
-  res.header("Access-Control-Allow-Origin", req.headers.origin);
-  res.header("Access-Control-Allow-Credentials", true);
-  CompanyModel.find({}, (err, result) => {
+app.get('/get-companies', (req, res) => {
+  const params = {
+    TableName: 'companies',
+  };
+
+  dynamodb.scan(params, (err, result) => {
     if (err) {
       res.json(err);
     } else {
-      res.json(result);
+      res.json(result.Items);
     }
   });
 });
 
 // create operations
-app.post("/create-company", async (req, res) => {
-  const ideaForCompany = req.body;
-  const newideaForCompany = new CompanyModel(ideaForCompany);
-  await newideaForCompany.save();
+app.post('/create-company', async (req, res) => {
+  const params = {
+    TableName: 'companies',
+    Item: req.body,
+  };
 
-  res.status(201).json(newideaForCompany);
+  await dynamodb.put(params).promise();
+  res.status(201).json(params.Item);
 });
 
-// * Update opertions
-app.put("/update-company", async (req, res) => {
+// * Update operations
+app.put('/update-company', async (req, res) => {
   const _id = req.query._id;
+  const params = {
+    TableName: 'companies',
+    Key: {
+      _id: _id,
+    },
+    UpdateExpression: 'set #name = :name, #description = :description',
+    ExpressionAttributeNames: {
+      '#name': 'name',
+      '#description': 'description',
+    },
+    ExpressionAttributeValues: {
+      ':name': req.body.name,
+      ':description': req.body.description,
+    },
+    ReturnValues: 'UPDATED_NEW',
+  };
 
   try {
-    const response = await CompanyModel.updateOne({ _id: _id }, req.body);
-    res.send(req.body);
+    const result = await dynamodb.update(params).promise();
+    res.status(200).json(result);
   } catch (err) {
     console.log(err);
-    res.send(err);
+    res.status(500).json({ error: 'Could not update company' });
   }
 });
 
-//* Delete operations
-app.delete("/delete-company/:id", async (req, res) => {
-  const _id = req.params.id;
+// * Delete operations
+app.delete('/delete-company/:id', async (req, res) => {
+  const params = {
+    TableName: 'companies',
+    Key: {
+      _id: req.params.id,
+    },
+  };
 
-  await CompanyModel.findByIdAndRemove(_id).exec();
-  res.send("Deleted");
+  try {
+    await dynamodb.delete(params).promise();
+    res.status(200).json({ message: 'Company deleted successfully' });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Could not delete company' });
+  }
 });
 
-
-
-
-
-
-
-app.listen(PORT, (req, res) => {
-  console.log(`Currently server is running at http://localhost:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

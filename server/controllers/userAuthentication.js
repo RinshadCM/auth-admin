@@ -3,6 +3,16 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { DocumentClient } = require('aws-sdk/clients/dynamodb');
 const { promisify } = require('util');
+const AWS = require('aws-sdk');
+
+console.log(process.env.AWS_SECRET_ACCESS_KEY);
+console.log(process.env.AWS_ACCESS_KEY_ID)
+// Set the credentials
+AWS.config.update({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey:process.env.AWS_SECRET_ACCESS_KEY,
+    region: 'eu-north-1'
+  });
 
 const docClient = new DocumentClient();
 const promisifiedScan = promisify(docClient.scan).bind(docClient);

@@ -13,14 +13,13 @@ const userRoutes = require('./routes/user');
 
 const app = express();
 
-// Set the region
-AWS.config.update({ region: 'ap-south-1' });
-
 // Set the credentials
 AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_ID,
-  secretAccessKey:process.env.ACCESS_KEY_SECRET,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey:process.env.AWS_SECRET_ACCESS_KEY,
+  region: 'eu-north-1'
 });
+
 
 // Create a DynamoDB instance
 const dynamodb = new AWS.DynamoDB.DocumentClient();
@@ -31,7 +30,6 @@ console.log(dynamodb);
 // middlewares
 app.use(bodyParser.json());
 app.use(cookieParser());
-
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
 // routes middlewares

@@ -1,10 +1,10 @@
 const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
 
-AWS.config.update({ region: 'ap-south-1' }); // update with your desired region
+AWS.config.update({ region: 'eu-north-1' }); // update with your desired region
 const dynamodb = new AWS.DynamoDB.DocumentClient({
   apiVersion: '2012-08-10',
-  region: 'ap-south-1',
+  region: 'eu-north-1',
   TableName: 'companies',
   ReadCapacityUnits: 1,
   WriteCapacityUnits: 1,

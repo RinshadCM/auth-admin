@@ -58,7 +58,7 @@ app.get('/get-company', (req, res) => {
   try {
     if (req.query._id !== undefined) {
       const params = {
-        TableName: 'companies',
+        TableName: 'details',
         Key: {
           _id: req.query._id,
         },
@@ -82,7 +82,7 @@ app.get('/get-company', (req, res) => {
 // req.body.name / req.query.name
 app.get('/get-companies', (req, res) => {
   const params = {
-    TableName: 'companies',
+    TableName: 'details',
   };
 
   dynamodb.scan(params, (err, result) => {
@@ -97,7 +97,7 @@ app.get('/get-companies', (req, res) => {
 // create operations
 app.post('/create-company', async (req, res) => {
   const params = {
-    TableName: 'companies',
+    TableName: 'details',
     Item: req.body,
   };
 
@@ -109,7 +109,7 @@ app.post('/create-company', async (req, res) => {
 app.put('/update-company', async (req, res) => {
   const _id = req.query._id;
   const params = {
-    TableName: 'companies',
+    TableName: 'details',
     Key: {
       _id: _id,
     },
@@ -137,7 +137,7 @@ app.put('/update-company', async (req, res) => {
 // * Delete operations
 app.delete('/delete-company/:id', async (req, res) => {
   const params = {
-    TableName: 'companies',
+    TableName: 'details',
     Key: {
       _id: req.params.id,
     },

@@ -5,7 +5,7 @@ AWS.config.update({ region: 'eu-north-1' }); // update with your desired region
 const dynamodb = new AWS.DynamoDB.DocumentClient({
   apiVersion: '2012-08-10',
   region: 'eu-north-1',
-  TableName: 'companies',
+  TableName: 'details',
   ReadCapacityUnits: 1,
   WriteCapacityUnits: 1,
 });
@@ -21,7 +21,7 @@ dynamodb.createTable(CompanyModel, function(err, data) {
 const CompanyModel = {
   create: function(company, callback) {
     const params = {
-      TableName: 'companies',
+      TableName: 'details',
       Item: {
         email: company.email,
         password: company.password || '',
@@ -46,7 +46,7 @@ const CompanyModel = {
   
   read: function(email, callback) {
     const params = {
-      TableName: 'companies',
+      TableName: 'details',
       Key: {
         email: email
       }
@@ -65,7 +65,7 @@ const CompanyModel = {
   
   update: function(company, callback) {
     const params = {
-      TableName: 'companies',
+      TableName: 'details',
       Key: {
         email: company.email
       },
@@ -93,7 +93,7 @@ const CompanyModel = {
   
   delete: function(email, callback) {
     const params = {
-      TableName: 'companies',
+      TableName: 'details',
       Key: {
         email: email
       },

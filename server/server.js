@@ -147,10 +147,11 @@ app.put("/update-company", async (req, res) => {
 
 // * Delete operations
 app.delete('/delete-company/:id', async (req, res) => {
+  console.log(req.params);
   const params = {
     TableName: 'details',
     Key: {
-      _id: req.params.id,
+      email: req.params.id,
     },
   };
 

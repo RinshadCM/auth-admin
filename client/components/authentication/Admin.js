@@ -4,7 +4,6 @@ import {isAuthenticated} from "../../actions/authentication";
 
 const Admin = ({children})=>{
 
-
     useEffect(()=>{
         if(!isAuthenticated()){
             Router.push(`/login`);

@@ -1,13 +1,13 @@
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-require('dotenv').config();
-const AWS = require('aws-sdk');
-require('aws-sdk/lib/maintenance_mode_message').suppress = true;
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+require("dotenv").config();
+const AWS = require("aws-sdk");
+require("aws-sdk/lib/maintenance_mode_message").suppress = true;
 // const blogRoutes = require('./routes/blog');
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/user');
+const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/user");
 // const categoryRoutes = require('./routes/category');
 // const tagRoutes = require('./routes/tag');
 
@@ -17,9 +17,8 @@ const app = express();
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: 'eu-north-1'
+  region: "eu-north-1",
 });
-
 
 // Create a DynamoDB instance
 const dynamodb = new AWS.DynamoDB.DocumentClient();
@@ -30,35 +29,35 @@ const PORT = process.env.PORT || 4000;
 // middlewares
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 // routes middlewares
 // app.use('/api', blogRoutes);
-app.use('/api', authRoutes);
-app.use('/api', userRoutes);
+app.use("/api", authRoutes);
+app.use("/api", userRoutes);
 // app.use('/api', categoryRoutes);
 // app.use('/api', tagRoutes);
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.json({
-    'get list of all companies': '/get-companies',
-    'get details of a company by id': '/get-company/?_id=<company_id>',
-    'post a new company': '/create-company',
-    'update company details': '/update-company/?_id=<company_id> //PUT method',
-    'delete company': '/delete-company/:id //DELETE method', // changed to path param
-    'get list of all jobs using companyId': '/get-jobs',
-    'post a new job': '/create-job',
-    'update job details': '/update-job //PUT method',
-    'delete job': '/delete-job //DELETE method',
+    "get list of all companies": "/get-companies",
+    "get details of a company by id": "/get-company/?_id=<company_id>",
+    "post a new company": "/create-company",
+    "update company details": "/update-company/?_id=<company_id> //PUT method",
+    "delete company": "/delete-company/:id //DELETE method", // changed to path param
+    "get list of all jobs using companyId": "/get-jobs",
+    "post a new job": "/create-job",
+    "update job details": "/update-job //PUT method",
+    "delete job": "/delete-job //DELETE method",
   });
 });
 
 // get a single company by using _id
-app.get('/get-company', (req, res) => {
+app.get("/get-company", (req, res) => {
   try {
     if (req.query.email !== undefined) {
       const params = {
-        TableName: 'details',
+        TableName: "details",
         Key: {
           email: req.query.email,
         },
@@ -80,9 +79,9 @@ app.get('/get-company', (req, res) => {
 
 // get the list of all companies
 // req.body.name / req.query.name
-app.get('/get-companies', (req, res) => {
+app.get("/get-companies", (req, res) => {
   const params = {
-    TableName: 'details',
+    TableName: "details",
   };
   dynamodb.scan(params, (err, result) => {
     if (err) {
@@ -94,9 +93,9 @@ app.get('/get-companies', (req, res) => {
 });
 
 // create operations
-app.post('/create-company', async (req, res) => {
+app.post("/create-company", async (req, res) => {
   const params = {
-    TableName: 'details',
+    TableName: "details",
     Item: req.body,
   };
 
@@ -109,10 +108,10 @@ app.put("/update-company", async (req, res) => {
   const email = req.query.email; // update to use email instead of id
   console.log(req.body);
   const params = {
-    TableName: 'details',
-    Item:req.body,
+    TableName: "details",
+    Item: req.body,
     Key: {
-      'email': { S: email} // update to use email instead of id
+      email: { S: email }, // update to use email instead of id
     },
     // UpdateExpression: 'SET #email = :email, #fname = :fname, #image = :image, #lname = :lname, #password = :password, #roles = :roles',
     // ExpressionAttributeNames: {
@@ -132,7 +131,7 @@ app.put("/update-company", async (req, res) => {
     //   ':roles': { SS: req.body.roles }
     // }
   };
-  
+
   try {
     const response = await dynamodb.put(params).promise();
     res.send(req.body);
@@ -142,14 +141,11 @@ app.put("/update-company", async (req, res) => {
   }
 });
 
-
-
-
 // * Delete operations
-app.delete('/delete-company/:id', async (req, res) => {
+app.delete("/delete-company/:id", async (req, res) => {
   console.log(req.params);
   const params = {
-    TableName: 'details',
+    TableName: "details",
     Key: {
       email: req.params.id,
     },
@@ -157,10 +153,10 @@ app.delete('/delete-company/:id', async (req, res) => {
 
   try {
     await dynamodb.delete(params).promise();
-    res.status(200).json({ message: 'Company deleted successfully' });
+    res.status(200).json({ message: "Company deleted successfully" });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: 'Could not delete company' });
+    res.status(500).json({ error: "Could not delete company" });
   }
 });
 

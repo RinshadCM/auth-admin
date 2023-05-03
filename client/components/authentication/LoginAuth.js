@@ -2,7 +2,6 @@ import React,{useState,useEffect} from 'react';
 import {login,authenticate,isAuthenticated} from "../../actions/authentication.js";
 import Router from "next/router";
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
-
 const LoginAuth = () => {
 
     const [info,setInfo] = useState({email:"",password:"",error:"",loading:false,message:"",showForm:true});

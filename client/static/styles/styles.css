@@ -1,15 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap');
 
-
-
-
 .fixedshow {
   position: fixed;
 }
 .hidepage {
   display: none;
 }
-
 
 
 #nprogress .bar {
@@ -486,6 +482,7 @@ nav ul li {
   width: 70%;
 }
 input[type="email"],
+input[type="password"],
 input[type="number"],
 input[type="text"] {
   width: calc(100% - 12px);
@@ -517,6 +514,7 @@ textarea {
 input[type="email"]:focus,
 input[type="number"]:focus,
 input[type="text"]:focus,
+input[type="password"]:focus,
 textarea:focus {
   border: 3px solid #ffc700;
 }

@@ -173,10 +173,10 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
                 </p> */}
                 <input
                   type="text"
-                  placeholder="Email Address Add"
+                  placeholder="Email Address"
                   value={userEmail}
                   onChange={(e) => setuserEmail(e.target.value)}
-                  className="px-3 py-2 placeholder-[#6B7280] text-[#030303] placeholder-opacity-90 relative bg-white rounded text-sm border-[1.5px] focus:outline-none focus:border-[#2dc5a1] focus:border-2  w-full transition duration-200 ease-in"
+                  className="px-1 py-2 placeholder-[#6B7280] text-[#030303]  placeholder-opacity-90 relative bg-white rounded text-sm border rounded-tr-[3.5px] rounded-br-[3.5px]  focus:outline-none focus:border-[#2dc5a1] focus:border-2  w-full  transition duration-200 ease-in"
                 />
               </div>
               <div className="flex w-full h-1/4">
@@ -218,7 +218,6 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
                 />
               </div> */}
               <div className="px-10 w-full space-y-2">
-                <p className="text-[12px] font-semibold text-[#201e27]">Role</p>
                 <div className="relative">
                   <select
                     value={roles}

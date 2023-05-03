@@ -89,7 +89,7 @@ const Header = (props) => {
                 <button style={{padding:"-10px"}} className="btn btn-info">
               <NavLink href="/signup">
               <PersonAddIcon/>
-                Resgister
+                Register
               </NavLink>
               </button>
             </NavItem>

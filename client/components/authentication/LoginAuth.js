@@ -57,11 +57,11 @@ const LoginAuth = () => {
         <form onSubmit={handleSubmit}>
          {/* Email */}
          <div className="form-group">
-            <input type="email" value={email} className="form-control" onChange={handleChange("email")} placeholder="Enter your @Email address"/>
+            <input type="email" value={email} className="form-control" onChange={handleChange("email")} placeholder="Enter your Email"/>
         </div>
         {/* Password */}
          <div className="form-group">
-            <input type="password" value={password} className="form-control" onChange={handleChange("password")} placeholder="New password"/>
+            <input type="password" value={password} className="form-control" onChange={handleChange("password")} placeholder="Enter Password"/>
         </div>
         {/* <div className =  */}
         <div className="col text-center">

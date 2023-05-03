@@ -56,7 +56,7 @@ const Register = () => {
                 </div>
                 {/* Email */}
                 <div className="form-group">
-                    <input type="email" value={email} className="form-control" onChange={handleChange("email")} placeholder="Enter your @Email address" />
+                    <input type="email" value={email} className="form-control" onChange={handleChange("email")} placeholder="Enter your Email" />
                 </div>
                 {/* Password */}
                 <div className="form-group">

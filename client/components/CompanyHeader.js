@@ -4,7 +4,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Router from "next/router";
 
-function CompanyHeader({ id, companyDetails }) {
+function CompanyHeader({ email, companyDetails }) {
   const message = () => {
     return (
       <div className="flex items-center justify-betwen">
@@ -39,6 +39,7 @@ function CompanyHeader({ id, companyDetails }) {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [roles, setRoles] = useState("");
+  const [activecheck, setActivecheck] = useState(true);
   // const [companyLogo, setCompanyLogo] = useState("");
   // const [companyTagline, setCompanyTagline] = useState("");
   // const [featured, setFeatured] = useState(false);
@@ -65,6 +66,7 @@ function CompanyHeader({ id, companyDetails }) {
       setFname(companyDetails.fname);
       setLname(companyDetails.lname);
       setRoles(companyDetails.roles);
+      setActivecheck(companyDetails.activecheck);
       // setCompanyLogo(companyDetails.image);
       // setCompanyTagline(companyDetails.tagline);
       // setFeatured(companyDetails.featured);
@@ -114,9 +116,10 @@ function CompanyHeader({ id, companyDetails }) {
         roles: roles,
         numberOfOpenings: companyDetails.numberOfOpenings,
         image: companyDetails.image,
+        activecheck: activecheck,
       },
       // withCredentials: true,
-      url: `http://localhost:4000/update-company/?_id=${id}`,
+      url: `http://localhost:4000/update-company/?_email=${email}`,
     });
 
     // setuserList((userList) => [...userList, company]);
@@ -132,7 +135,7 @@ function CompanyHeader({ id, companyDetails }) {
     await axios({
       method: "delete",
       // withCredentials: true,
-      url: `http://localhost:4000/delete-company/${id}`,
+      url: `http://localhost:4000/delete-company/${email}`,
     });
 
     Router.push("/userDashboard/companies");
@@ -175,7 +178,7 @@ function CompanyHeader({ id, companyDetails }) {
             <div className="w-full">
               <input
                 type="text"
-                placeholder="Enter User Mail Address"
+                placeholder="Enter User Mail Address Edit"
                 value={userEmail}
                 onChange={(e) => setuserEmail(e.target.value)}
                 className="px-3 py-2 placeholder-[#6B7280] text-[#030303] placeholder-opacity-90 relative bg-white rounded text-sm border-[1.5px] focus:outline-none focus:border-[#2dc5a1] focus:border-2  w-full transition duration-200 ease-in"

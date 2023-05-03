@@ -16,7 +16,7 @@ const app = express();
 // Set the credentials
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey:process.env.AWS_SECRET_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: 'eu-north-1'
 });
 
@@ -25,7 +25,7 @@ AWS.config.update({
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 const PORT = process.env.PORT || 4000;
-console.log(dynamodb);
+// console.log(dynamodb);
 
 // middlewares
 app.use(bodyParser.json());
@@ -56,11 +56,11 @@ app.get('/', (req, res) => {
 // get a single company by using _id
 app.get('/get-company', (req, res) => {
   try {
-    if (req.query._id !== undefined) {
+    if (req.query.email !== undefined) {
       const params = {
         TableName: 'details',
         Key: {
-          _id: req.query._id,
+          email: req.query.email,
         },
       };
 
@@ -84,7 +84,6 @@ app.get('/get-companies', (req, res) => {
   const params = {
     TableName: 'details',
   };
-
   dynamodb.scan(params, (err, result) => {
     if (err) {
       res.json(err);
@@ -106,33 +105,45 @@ app.post('/create-company', async (req, res) => {
 });
 
 // * Update operations
-app.put('/update-company', async (req, res) => {
-  const _id = req.query._id;
+app.put("/update-company", async (req, res) => {
+  const email = req.query.email; // update to use email instead of id
+  console.log(req.body);
   const params = {
     TableName: 'details',
+    Item:req.body,
     Key: {
-      _id: _id,
+      'email': { S: email} // update to use email instead of id
     },
-    UpdateExpression: 'set #name = :name, #description = :description',
-    ExpressionAttributeNames: {
-      '#name': 'name',
-      '#description': 'description',
-    },
-    ExpressionAttributeValues: {
-      ':name': req.body.name,
-      ':description': req.body.description,
-    },
-    ReturnValues: 'UPDATED_NEW',
+    // UpdateExpression: 'SET #email = :email, #fname = :fname, #image = :image, #lname = :lname, #password = :password, #roles = :roles',
+    // ExpressionAttributeNames: {
+    //   '#email': 'email',
+    //   '#fname': 'fname',
+    //   '#image': 'image',
+    //   '#lname': 'lname',
+    //   '#password': 'password',
+    //   '#roles': 'roles'
+    // },
+    // ExpressionAttributeValues: {
+    //   ':email': { S: req.body.email },
+    //   ':fname': { S: req.body.fname },
+    //   ':image': { S: req.body.image },
+    //   ':lname': { S: req.body.lname },
+    //   ':password': { S: req.body.password },
+    //   ':roles': { SS: req.body.roles }
+    // }
   };
-
+  
   try {
-    const result = await dynamodb.update(params).promise();
-    res.status(200).json(result);
+    const response = await dynamodb.put(params).promise();
+    res.send(req.body);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: 'Could not update company' });
+    res.send(err);
   }
 });
+
+
+
 
 // * Delete operations
 app.delete('/delete-company/:id', async (req, res) => {

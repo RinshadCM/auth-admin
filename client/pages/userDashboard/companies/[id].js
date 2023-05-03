@@ -23,7 +23,7 @@ function Company() {
       await axios({
         method: "get",
         // withCredentials: true,
-        url: `http://localhost:4000/get-company/?_id=${id}`,
+        url: `http://localhost:4000/get-company/?email=${id}`,
       }).then((data) => {
         setCompanyDetails(data.data);
       });

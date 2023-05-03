@@ -6,6 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { AiFillCheckCircle } from "react-icons/ai";
 import Router from "next/router";
 
+
 function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails }) {
   const message = () => {
     return (
@@ -36,7 +37,6 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
   const [userEmail, setuserEmail] = useState("");
   const [pass, setPass] = useState("");
   const [companyLogo, setCompanyLogo] = useState("");
-
   const [facebook, setFacebook] = useState("");
   const [activecheck, setActivecheck] = useState(true);
   const [fname, setFname] = useState("");
@@ -47,7 +47,6 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
   const [teamSize, setTeamSize] = useState("");
   const [aboutCompany, setAboutCompany] = useState("");
   const [roles, setRoles] = useState("Admin");
-  const [companyDescription, setCompanyDescription] = useState("");
 
   useEffect(() => {
     if (companyDetails) {
@@ -85,7 +84,7 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
         lname: lname,
         activecheck: activecheck,
         image: companyLogo,
-        roles: roles
+        roles: roles,
       },
       // withCredentials: true,
       url: "http://localhost:4000/create-company",
@@ -97,7 +96,6 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
     //     `/dashboard/companies/${response.data._id}`
     //   );
     // }
-
     setuserList((userList) => [...userList, response.data]);
     setuserEmail("");
     setPass("");
@@ -175,7 +173,7 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
                 </p> */}
                 <input
                   type="text"
-                  placeholder="Email Address"
+                  placeholder="Email Address Add"
                   value={userEmail}
                   onChange={(e) => setuserEmail(e.target.value)}
                   className="px-3 py-2 placeholder-[#6B7280] text-[#030303] placeholder-opacity-90 relative bg-white rounded text-sm border-[1.5px] focus:outline-none focus:border-[#2dc5a1] focus:border-2  w-full transition duration-200 ease-in"

@@ -30,6 +30,10 @@ function Companies() {
     });
   }, []);
 
+  useEffect(()=>{
+    console.log(userList);
+  })
+
   const message = () => {
     return (
       <div className="flex items-center justify-betwen">
@@ -142,7 +146,7 @@ function Companies() {
                   <p className='fw-normal mb-1'>{element.email}</p>
                 </td>
                 <td>
-                  <p className='fw-normal mb-1'>{element.roles[0]}</p>
+                  <p className='fw-normal mb-1'>{element.roles}</p>
                 </td>
                 {/* <td>
             <MDBBadge color='success' pill>
@@ -151,8 +155,8 @@ function Companies() {
           </td> */}
                 <td>
                   <Button color='link' rounded size='sm'
-                    key={element._id}
-                    href={`/userDashboard/companies/${element._id}`}
+                    key={element.email}
+                    href={`/userDashboard/companies/${element.email}`}
                     passHref>
                     Edit
                   </Button>
@@ -160,8 +164,8 @@ function Companies() {
                     color='link'
                     rounded
                     size='sm'
-                    key={element._id}
-                    onClick={() => handleDelete(element._id)}
+                    key={element.email}
+                    onClick={() => handleDelete(element.email)}
                   >
                     Delete
                   </Button>

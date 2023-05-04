@@ -152,7 +152,7 @@ function CompanyHeader({ email, companyDetails }) {
     };
   };
   return (
-    <div className="w-75 p-4 bg-white flex flex-col justify-center px-20 pt-10">
+    <div className="w-75 p-4 bg-transparent flex flex-col justify-center px-20 pt-10">
       <form className="p-6" onSubmit={handleSubmit}>
         <div className="flex w-full items-center">
           <div className="mr-8">

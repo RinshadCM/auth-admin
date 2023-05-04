@@ -47,10 +47,10 @@ const Index = () => {
 
   return (
     <>
-      <LandingLayout
+      {/* <LandingLayout
         title={"Tech Blogsite"}
         MetaDescription="Welcome to the Tech blogsite a very easy and elegant way to create and to browse a blog which is built entirely on MERN stack.The frontend of this site is created using nextjs and reactjs.Express and node is running on the backend and MongoDb is used as an Database for storing blogs as well as  user profiles.Join now and create your very own blog without any hassle."
-      >
+      > */}
         <div style={{ backgroundColor: "white" }}>
           <section className="hero">
             <div className="info-hero">
@@ -62,11 +62,10 @@ const Index = () => {
                 <div className="hero-title">
                   <h1>
                     "Admin Panel" <br />
-                    Browse as well as create blogs related to various different
-                    kind technologies.
+                    Simplifying your daily operations, one click at a time.
                   </h1>
                 </div>
-                <p>Take your blogging skills to next level</p>
+                <p>Discover the power of our admin panel</p>
                 <Link href="/signup">
                   <a className="button-transparent selectionNone">
                     <div>
@@ -79,13 +78,13 @@ const Index = () => {
 						Tech Blogs
 						</span> */}
               <span className="hero-effect code-effect selectionNone">
-                Blogs
+                Admin
               </span>
             </div>
             <div className="services-side-pannel"></div>
-            <div className="scroll-icon"></div>
+            {/* <div className="scroll-icon"></div> */}
           </section>
-          <section
+          {/* <section
             id="aboutblog"
             style={{ backgroundColor: "#5cdb95" }}
             className="info-landing yellow"
@@ -203,9 +202,9 @@ const Index = () => {
               src="/static/assets/BlogPostBack.svg"
               alt="img"
             />
-          </section>
+          </section> */}
         </div>
-      </LandingLayout>
+      {/* </LandingLayout> */}
     </>
   );
 };

@@ -135,7 +135,7 @@ function Modal({ modalOpen, userList, setuserList, setModalOpen, companyDetails 
         } top-0 left-0 z-50 overflow-auto bg-smoke-light flex w-[100vw] h-[100vh]`}
     >
       <div className="relative w-200 bg-white m-auto flex rounded-lg flex-col">
-        <div className="bg-[#eff2f6] flex justify-between p-6 rounded-t-lg">
+        <div className="bg-[#eff2f6] flex justify-between rounded-t-lg">
           {/* <p className=" text-black leading-5 font-semibold m-0">
             Add User
           </p> */}

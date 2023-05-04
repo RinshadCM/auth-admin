@@ -36,7 +36,7 @@ function Company() {
         <PrivateRoute>
           <Sidebar />
           <div className="main">
-            <div className="min-h-screen pb-[20px] bg-[#f8f8f8]">
+            <div className="min-h-screen pb-[200px] bg-[#f8f8f8]">
               <CompanyHeader id={id} companyDetails={companyDetails} />
 
               {/* <ul className="flex justify-between w-full px-20 text-lg pt-5 border-b">

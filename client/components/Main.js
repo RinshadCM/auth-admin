@@ -1,13 +1,11 @@
+import Dashboardpanel from "./src/pages/index";
 function Main() {
-    return (
-        <div className="bg-gray-100 calc-width max-h-screen float-right">
-            <div className="shadow-md">
-                <div className="flex flex-row justify-between p-4 items-start bg-white">
-                    <span className="mt-1">Logo Checking</span>
-                </div>
-            </div>
-        </div>
-    );
+  return (
+    <>
+      <h1>Dashboard works</h1>
+      <Dashboardpanel/>
+    </>
+  );
 }
 
 export default Main;
